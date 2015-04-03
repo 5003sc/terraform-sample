@@ -1,0 +1,43 @@
+{
+  "variables": {
+    "AWS_ACCESS_KEY_ID": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "AWS_SECRET_ACCESS_KEY": "{{env `AWS_SECRET_ACCESS_KEY`}}"
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `AWS_ACCESS_KEY_ID`}}",
+    "secret_key": "{{user `AWS_SECRET_ACCESS_KEY`}}",
+    "region": "us-west-2",
+    "vpc_id": "vpc-626eda07",
+    "subnet_id": "subnet-79078b1c",
+    "associate_public_ip_address": true,
+    "ssh_private_ip": false,
+    "source_ami": "ami-3f387b0f",
+    "instance_type": "t2.medium",
+    "ssh_username": "ubuntu",
+    "ami_name": "bastion {{timestamp}}"
+  }],
+  "push": {
+    "name": "example-hashicorp-org/bastion",
+    "vcs": false,
+    "base_dir": "../chef-repo"
+  },
+  "provisioners": [{
+    "type": "chef-solo",
+    "cookbook_paths": ["cookbooks"],
+    "data_bags_path": "data_bags",
+    "roles_path": "roles",
+    "run_list": [
+      "role[base]",
+      "role[bastion]"
+    ]
+  }],
+  "post-processors": [{
+    "type": "atlas",
+    "artifact": "example-hashicorp-org/bastion",
+    "artifact_type": "aws.ami",
+    "metadata": {
+      "created_at": "{{timestamp}}"
+    }
+  }]
+}

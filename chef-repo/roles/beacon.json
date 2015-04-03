@@ -1,0 +1,19 @@
+{
+  "name": "beacon",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "nginx": {
+      "default_site_enabled": false,
+      "version": "1.7.10"
+    },
+    "td_agent": {
+      "includes": "true",
+      "plugins": [ "s3" ]
+    }
+  },
+  "description": "Bastion server for proxying SSH connections",
+  "run_list": [
+    "nginx"
+  ]
+}

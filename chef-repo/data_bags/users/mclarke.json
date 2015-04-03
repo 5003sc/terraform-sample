@@ -1,0 +1,10 @@
+{
+  "id": "mclarke",
+  "ssh_keys": [
+    "SSH PUBLIC KEY"
+  ],
+  "groups": [ "sysadmin" ],
+  "uid": 9001,
+  "shell": "\/bin\/bash",
+  "comment": "Mike Clarke"
+}

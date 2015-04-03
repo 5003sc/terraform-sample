@@ -1,0 +1,33 @@
+{
+  "name": "base",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "apt": {
+      "compile_time_update": "true"
+    },
+    "authorization": {
+      "sudo": {
+        "groups": [ "sysadmin" ],
+        "passwordless": "true"
+      }
+    },
+    "auth": {
+      "pw_max_age": -1
+    },
+    "java": {
+      "install_flavor": "oracle",
+      "jdk_version": "7",
+      "oracle": {
+        "accept_oracle_download_terms": "true"
+      }
+    }
+  },
+  "description": "The base role for all systems",
+  "run_list": [
+    "recipe[chef-solo-search]",
+    "recipe[os-hardening]",
+    "recipe[sudo]",
+    "recipe[users::sysadmins]"
+  ]
+}

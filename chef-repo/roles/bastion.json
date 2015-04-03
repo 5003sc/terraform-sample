@@ -1,0 +1,13 @@
+{
+  "name": "bastion",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "ssh": {
+      "allow_tcp_forwarding": "true",
+      "allow_agent_forwarding": "true"
+    }
+  },
+  "description": "Bastion server for proxying SSH connections",
+  "run_list": []
+}
